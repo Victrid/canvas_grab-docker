@@ -13,9 +13,9 @@ echo " │  Visit Docker hub for usage    │" > $STDOUT
 echo " │     victrid/canvas_grabd       │" > $STDOUT 
 echo " └────────────────────────────────┘" > $STDOUT 
 echo "Exporting env variables..." > $STDOUT
-printenv | sed 's/^\(.*\)$/export \1/g' > /etc/profile
+declare -p > /etc/profile
 echo "Scheduler settings: $SCHEDULE" > $STDOUT
-echo "$SCHEDULE /bin/sh -c 'source /etc/profile && /canvas/download.sh'" > $STDOUT 2>$STDERR" > /etc/cron.d/canvas
+echo "$SCHEDULE /bin/bash -c '. /etc/profile && /canvas/download.sh' > $STDOUT 2>$STDERR" > /etc/cron.d/canvas
 echo "Applying crontab..." > $STDOUT
 crontab /etc/cron.d/canvas
 echo "Current crontab:" > $STDOUT
